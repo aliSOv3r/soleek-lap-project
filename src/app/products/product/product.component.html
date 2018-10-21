@@ -1,0 +1,49 @@
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <input formControlName="proName" matInput placeholder="Product Name*">
+          <mat-error>This Field Is Required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="proCategory" placeholder="Chosse a Category*">
+            <mat-error>This Field Is Required</mat-error>
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let cCategory of categoryService.array">
+              <mat-option value="{{cCategory.$key}}">{{cCategory.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="proPrice" matInput placeholder="Product Price*">
+          <mat-error>This Field Is Required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="proSku" matInput placeholder="Stook Holding Unit*">
+          <mat-error>This Field Is Required</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+      <mat-form-field>
+        <input formControlName="proImg" matInput placeholder="Product Image Url*">
+        <mat-error>This Field Is Required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="proDate" matInput [matDatepicker]="picker" placeholder="Date*">
+        <mat-error>This Field Is Required</mat-error>
+        <mat-datepicker-toggle matSuffix [for]=picker></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">submit</button>
+        <button mat-raised-button color="warn" (click)="onClear()">clear</button>
+      </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
